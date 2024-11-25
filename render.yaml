@@ -19,6 +19,10 @@ services:
         value: core.settings
       - key: DEBUG
         value: "False"
+      - key: ALLOWED_HOSTS
+        value: ".onrender.com,localhost"
+      - key: CORS_ALLOWED_ORIGINS
+        value: "https://invoicesystem-sandy.vercel.app"
 
 databases:
   - name: invoice-db
