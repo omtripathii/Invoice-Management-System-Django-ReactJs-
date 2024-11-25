@@ -7,11 +7,11 @@ A full-stack application for managing invoices, combining the power of **React**
 
 ### Homepage
 
-![App Homepage](Images/Screenshot 2024-11-26 010530.png)
+![App Screenshot](https://github.com/omtripathii/Invoice-Management-System-Django-ReactJs-/blob/main/Images/Screenshot%202024-11-26%20010530.png)
 
 ### Create Invoice
 
-![App Invoice](Images/Screenshot 2024-11-26 010540.png)
+![App Invoice](https://github.com/omtripathii/Invoice-Management-System-Django-ReactJs-/blob/main/Images/Screenshot%202024-11-26%20010540.png)
 
 
 
