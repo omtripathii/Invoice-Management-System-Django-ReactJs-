@@ -57,10 +57,13 @@ MIDDLEWARE = [
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
     'whitenoise.middleware.WhiteNoiseMiddleware',
 ]
-CORS_ALLOWED_ORIGINS = os.environ.get(
-    'CORS_ALLOWED_ORIGINS',
-    'http://localhost:3000'
-).split(',')
+CORS_ALLOWED_ORIGINS = [
+    'http://localhost:3000',
+    'https://invoicesystem-5z5jeg.vercel.app',
+    'https://invoice-management-system-r5cf.onrender.com'
+]
+CORS_ALLOW_CREDENTIALS = True
+CORS_ALLOW_ALL_ORIGINS = True  # Only for development
 CORS_ALLOW_METHODS = [
     'DELETE',
     'GET',

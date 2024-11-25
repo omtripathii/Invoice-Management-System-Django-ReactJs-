@@ -1,0 +1,16 @@
+{
+    "rewrites": [
+      {
+        "source": "/api/:path*",
+        "destination": "https://invoice-management-system-r5cf.onrender.com/api/:path*"
+      }
+    ],
+    "headers": [
+      {
+        "source": "/api/(.*)",
+        "headers": [
+          { "key": "Access-Control-Allow-Origin", "value": "*" }
+        ]
+      }
+    ]
+  }
