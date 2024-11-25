@@ -71,6 +71,7 @@ invoice-management/
 3. **Start development server:**
 ```bash
 npm start
+```
 ## API Endpoints
 
 ### Invoices
