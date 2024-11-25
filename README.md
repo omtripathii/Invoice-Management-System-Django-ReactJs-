@@ -51,9 +51,7 @@ invoice-management/
 │       ├── hooks/          # Custom hooks
 │       ├── services/       # API services
 │       └── store/          # Redux store
-# Project Name
-
-A brief description of the project.
+```
 
 
 
