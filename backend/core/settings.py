@@ -60,7 +60,7 @@ MIDDLEWARE = [
 ]
 CORS_ALLOWED_ORIGINS = [
     'http://localhost:3000',
-    'https://invoicesystem-5z5jeg.vercel.app',
+    'https://invoicesystem-sandy.vercel.app',
     'https://invoice-management-system-r5cf.onrender.com'
 ]
 CORS_ALLOW_CREDENTIALS = True
