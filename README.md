@@ -3,6 +3,17 @@
 A full-stack application for managing invoices, combining the power of **React** on the frontend and **Django** on the backend.
 
 ---
+##  Screenshots
+
+### Homepage
+
+![App Homepage](Images/Screenshot 2024-11-26 010530.png)
+
+### Create Invoice
+
+![App Invoice](Images/Screenshot 2024-11-26 010540.png)
+
+
 
 ## 🚀 Features
 
