@@ -2,6 +2,8 @@ from rest_framework import viewsets
 from rest_framework.pagination import PageNumberPagination
 from rest_framework.response import Response
 from django.db.models import Q
+from django.db.utils import OperationalError
+from rest_framework import status
 from .models import Invoice
 from .serializers import InvoiceSerializer
 
@@ -23,31 +25,37 @@ class InvoiceViewSet(viewsets.ModelViewSet):
     pagination_class = CustomPagination
 
     def get_queryset(self):
-        queryset = Invoice.objects.all()
-        
-        # Apply filters
-        invoice_number = self.request.query_params.get('invoice_number')
-        customer_name = self.request.query_params.get('customer_name')
-        date_from = self.request.query_params.get('date_from')
-        date_to = self.request.query_params.get('date_to')
-        sort_by = self.request.query_params.get('sort_by', 'date')
-        sort_order = self.request.query_params.get('sort_order', 'desc')
+        try:
+            queryset = Invoice.objects.all()
+            
+            # Apply filters
+            invoice_number = self.request.query_params.get('invoice_number')
+            customer_name = self.request.query_params.get('customer_name')
+            date_from = self.request.query_params.get('date_from')
+            date_to = self.request.query_params.get('date_to')
+            sort_by = self.request.query_params.get('sort_by', 'date')
+            sort_order = self.request.query_params.get('sort_order', 'desc')
 
-        if invoice_number:
-            queryset = queryset.filter(invoice_number__icontains=invoice_number.upper())
+            if invoice_number:
+                queryset = queryset.filter(invoice_number__icontains=invoice_number.upper())
 
-        if customer_name:
-            queryset = queryset.filter(customer_name__icontains=customer_name)
-        
-        if date_from:
-            queryset = queryset.filter(date__gte=date_from)
-        
-        if date_to:
-            queryset = queryset.filter(date__lte=date_to)
+            if customer_name:
+                queryset = queryset.filter(customer_name__icontains=customer_name)
+            
+            if date_from:
+                queryset = queryset.filter(date__gte=date_from)
+            
+            if date_to:
+                queryset = queryset.filter(date__lte=date_to)
 
-        # Apply sorting
-        sort_field = sort_by
-        if sort_order == 'desc':
-            sort_field = f'-{sort_field}'
-        
-        return queryset.order_by(sort_field)
+            # Apply sorting
+            sort_field = sort_by
+            if sort_order == 'desc':
+                sort_field = f'-{sort_field}'
+            
+            return queryset.order_by(sort_field)
+        except OperationalError as e:
+            # Log the error and run migrations
+            from django.core.management import call_command
+            call_command('ensure_migrations')
+            raise Exception("Database setup in progress. Please try again in a moment.")

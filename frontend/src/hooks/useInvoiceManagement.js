@@ -26,10 +26,10 @@ export const useInvoiceManagement = () => {
       setStatus('succeeded');
     } catch (err) {
       console.error('Fetch error:', err);
-      if (retryCount < 3) {
+      if (err.message.includes('Database setup in progress') && retryCount < 3) {
         setTimeout(() => {
           fetchInvoices(retryCount + 1);
-        }, 2000 * (retryCount + 1));
+        }, 3000);
       } else {
         setError(err.message);
         setStatus('failed');
