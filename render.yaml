@@ -2,7 +2,10 @@ services:
   - type: web
     name: invoice-backend
     env: python
-    buildCommand: cd backend && pip install -r requirements.txt
+    buildCommand: |
+      cd backend && 
+      pip install -r requirements.txt && 
+      python manage.py migrate
     startCommand: cd backend && gunicorn core.wsgi:application
     envVars:
       - key: PYTHON_VERSION
@@ -11,6 +14,8 @@ services:
         fromDatabase:
           name: invoice-db
           property: connectionString
+      - key: DJANGO_SETTINGS_MODULE
+        value: core.settings
 
 databases:
   - name: invoice-db

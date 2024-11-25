@@ -12,7 +12,7 @@ export const useInvoiceManagement = () => {
     date_to: ''
   });
 
-  const fetchInvoices = async () => {
+  const fetchInvoices = async (retryCount = 0) => {
     try {
       setStatus('loading');
       const cleanFilters = {
@@ -25,8 +25,15 @@ export const useInvoiceManagement = () => {
       setItems(response.results || []);
       setStatus('succeeded');
     } catch (err) {
-      setError(err.message);
-      setStatus('failed');
+      console.error('Fetch error:', err);
+      if (retryCount < 3) {
+        setTimeout(() => {
+          fetchInvoices(retryCount + 1);
+        }, 2000 * (retryCount + 1));
+      } else {
+        setError(err.message);
+        setStatus('failed');
+      }
     }
   };
 
